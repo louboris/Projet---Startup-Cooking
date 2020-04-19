@@ -16,7 +16,7 @@
             <RowDefinition Height="368"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Background="Azure">
+        <Grid Grid.Row="1" Background="Azure" Name="MenuPrincipal" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition  />
                 <ColumnDefinition/>
@@ -27,8 +27,8 @@
                 <RowDefinition Height="50px"/>                
             </Grid.RowDefinitions>
 
-            <Button Name="btMenu1" Grid.Column="0" Grid.Row="0" Background="Aquamarine">
-                <TextBlock Text="Menu 1 "/>
+            <Button Name="btMenu1" Grid.Column="0" Grid.Row="0" Background="Aquamarine" Click="BtMenu1_Click">
+                <TextBlock Text="Tableau de Bord hebdo "/>
             </Button>
             <Button Name="btMenu2" Grid.Column="1" Grid.Row="0" Background="Aquamarine">
                 <TextBlock Text="Menu 1 "/>
@@ -40,7 +40,46 @@
 
 
         </Grid>
+        <Grid Grid.Row="1" Name="TableauBordSemaine" Visibility="Visible" Background="Red">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Cdr de la semaine :"/>
+                <TextBlock Name="tbCdrWeekly" Text="{Binding}"/>
+                
+            </StackPanel>
+            <Grid Grid.Column="1" Grid.Row="0" Background="Bisque">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Top 5 recettes commandées" HorizontalAlignment="Center" FontWeight="Bold"/>
+     
+                    <DataGrid ItemsSource="{Binding}" Name="dtgTop5" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="1" Background="Bisque">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Name="tbCdrOr" Text="{Binding}" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <DataGrid Grid.Row="1" DataContext="{Binding}" Name="dtCdrOrRecette"/>
+                </Grid>
+    
+            </Grid>
+
+        </Grid>
     </Grid>
 
 </Window>

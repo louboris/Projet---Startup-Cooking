@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,19 @@ namespace database_project_2020
     {
         public GestionnaireCook()
         {
+
             InitializeComponent();
+            DBClass database = new DBClass();
+            DataTable recette = database.ExecuteCommand("select * from recette");
+            dtgTop5.DataContext = recette.DefaultView;
+            tbCdrOr.Text = "Cdr OR : "; //RAJOUTER CDR OR ICI
+        }
+
+        private void BtMenu1_Click(object sender, RoutedEventArgs e)
+        {
+            MenuPrincipal.Visibility = Visibility.Hidden;
+            TableauBordSemaine.Visibility = Visibility.Visible;
+
         }
     }
 }
