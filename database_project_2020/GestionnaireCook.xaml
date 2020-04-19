@@ -7,6 +7,40 @@
         mc:Ignorable="d"
         Title="GestionnaireCook" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*" />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="368"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Background="Azure">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50px"/>                
+            </Grid.RowDefinitions>
+
+            <Button Name="btMenu1" Grid.Column="0" Grid.Row="0" Background="Aquamarine">
+                <TextBlock Text="Menu 1 "/>
+            </Button>
+            <Button Name="btMenu2" Grid.Column="1" Grid.Row="0" Background="Aquamarine">
+                <TextBlock Text="Menu 1 "/>
+            </Button>
+            <Button Name="btMenu3" Grid.Column="2" Grid.Row="0" Background="Aquamarine">
+                <TextBlock Text="Menu 1 "/>
+            </Button>
+
+
+
+        </Grid>
+
     </Grid>
+
 </Window>

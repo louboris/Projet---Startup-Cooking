@@ -16,5 +16,7 @@ namespace database_project_2020
         public int Remuneration { get; set; }
         public int Quantite { get; set; }
         public int Total { get; set; }
+        
+
     }
 }

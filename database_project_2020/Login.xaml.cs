@@ -37,10 +37,16 @@ namespace database_project_2020
                 if(databaseLogin.Connection(txUsername.Text, txPasseword.Password) == true)
                 {
                     User utilisateur = databaseLogin.GetUser(txUsername.Text, txPasseword.Password);
+                    if(utilisateur.username == "admin")
+                    {
 
-                    MainWindow dashBoard = new MainWindow(utilisateur);
-                    dashBoard.Show();
-                    this.Close();
+                    }
+                    else {
+                        MainWindow dashBoard = new MainWindow(utilisateur);
+                        dashBoard.Show();
+                        this.Close();
+                    }
+                    
                 }
                 else
                 {

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MySql.Data.MySqlClient;
 
 namespace database_project_2020
@@ -122,8 +123,9 @@ namespace database_project_2020
                 }
 
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 connection.Close();
             }
             connection.Close();
