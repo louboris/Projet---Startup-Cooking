@@ -53,6 +53,45 @@ namespace database_project_2020
 
             return utilisateurC;
         }
+
+        public string GetCdrOr()
+        {
+            string cdrOR = "";
+            String query = "select * from cdrOr";
+            DataTable dt = ExecuteCommand(query);
+            try
+            {
+                cdrOR = dt.Rows[0][0].ToString();
+            }
+            catch
+            {
+
+            }
+            if (cdrOR == "") cdrOR = "Il n'y a pas de cdrOR";
+            return cdrOR;
+        }
+
+        public User GetCdrWeek()
+        {
+
+            String query = "select * from bestWeekCreator";
+            DataTable dt = ExecuteCommand(query);
+            try
+            {
+                User cdrOR = new User(dt.Rows[0][0].ToString(), dt.Rows[0][1].ToString(), Convert.ToInt32(dt.Rows[0][2].ToString()), true);
+                return cdrOR;
+            }
+            catch
+            {
+                User cdrOR = new User("None","None",0);
+
+                return cdrOR;
+            }
+
+            
+        }
+
+
         public void AddRecette(string nom, string type, string descriptif, int prix, int createur)
         {
             String query = "insert into recette(nom,type,descriptif,prix,createur) values ( @nom ,@type , @descriptif , @prix , @createur );";
@@ -123,7 +162,7 @@ namespace database_project_2020
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 connection.Close();
