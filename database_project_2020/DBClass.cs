@@ -169,6 +169,65 @@ namespace database_project_2020
             }
             connection.Close();
         }
+        public void EraseRecipe(int IDrecette)
+        {
+            String query = "CALL SupprimerRecette( @IDrecette );";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@IDrecette", IDrecette);
 
+            connection.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                connection.Close();
+                
+            }
+        }
+        public void EraseCdrRecette(int IDCdr)
+        {
+            String query = "CALL SupprimerCdr( @IDCdr );";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@IDCdr", IDCdr);
+
+            connection.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                connection.Close();
+
+            }
+        }
+        public void DownCdrRecette(int IDCdr)
+        {
+            String query = "CALL DownGradeCdr( @IDCdr );";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@IDCdr", IDCdr);
+
+            connection.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                connection.Close();
+
+            }
+        }
     }
 }

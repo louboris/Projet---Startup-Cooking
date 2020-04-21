@@ -111,7 +111,8 @@
                 <TextBlock Background="Bisque" Text="Supprimer Recette" TextAlignment="Center" FontWeight="Bold"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <TextBlock Text="ID de la recette à supprimer"/>
-                    <TextBox Width="200"/>
+                    <TextBox Width="200" Name="tbRecetteIDSupp"/>
+                    <Button Name="btValidationSuppR" Click="BtValidationSuppR_Click"  Width="30" Height="30"/>
                 </StackPanel>
                 
             </Grid>
@@ -121,7 +122,14 @@
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
-                <TextBlock Background="Bisque" Text="Supprimer recette" TextAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Background="Bisque" Text="Supprimer Cuisinier" TextAlignment="Center" FontWeight="Bold"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="ID du cuisinier a supprimer"/>
+                    <TextBox Width="200" Name="tbSupprimerCuisinier"/>
+                    <Button Name="btValidationSuppC" Click="BtValidationSuppC_Click"  Width="30" Height="30"/>
+                    <Button Name="btValidationDownC" Click="BtValidationDownC_Click"  Width="30" Height="30"/>
+
+                </StackPanel>
             </Grid>
 
         </Grid>

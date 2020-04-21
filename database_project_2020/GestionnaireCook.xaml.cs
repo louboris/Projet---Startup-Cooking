@@ -20,6 +20,7 @@ namespace database_project_2020
     /// </summary>
     public partial class GestionnaireCook : Window
     {
+        DBClass database = new DBClass();
         public GestionnaireCook()
         {
 
@@ -48,12 +49,62 @@ namespace database_project_2020
         {
 
         }
-        
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             btBackTdBsMP.Visibility = Visibility.Hidden;
             MenuPrincipal.Visibility = Visibility.Visible;
             TableauBordSemaine.Visibility = Visibility.Hidden;
+        }
+
+        private void BtValidationSuppR_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Etes-vous sûr ? Action irreversible.", "Validation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    database.EraseRecipe(Convert.ToInt32(tbRecetteIDSupp.Text));
+                    break;
+                case MessageBoxResult.No:
+
+                    break;
+
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BtValidationSuppC_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Etes vous sur de vouloir supprimer le client\nAinsi que les recettes qu'il a crée ?", "Validation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    database.EraseCdrRecette(Convert.ToInt32(tbSupprimerCuisinier.Text));
+                    break;
+                case MessageBoxResult.No:
+
+                    break;
+
+            }
+        }
+
+        private void BtValidationDownC_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Etes vous sur de vouloir downgrader le CDR ?\nCette action entraine la SUPPRESSION de ses recettes.", "Validation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    database.DownCdrRecette(Convert.ToInt32(tbSupprimerCuisinier.Text));
+                    break;
+                case MessageBoxResult.No:
+
+                    break;
+
+            }
         }
     }
 }
