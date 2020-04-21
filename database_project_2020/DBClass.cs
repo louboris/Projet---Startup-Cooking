@@ -229,5 +229,56 @@ namespace database_project_2020
 
             }
         }
+
+        public string GetNbClient()
+        {
+            string nbClient = "";
+            String query = "select count(*) from client";
+            DataTable dt = ExecuteCommand(query);
+            try
+            {
+                nbClient = dt.Rows[0][0].ToString();
+            }
+            catch
+            {
+
+            }
+            if (nbClient == "") nbClient = "None";
+            return nbClient;
+        }
+        public string GetNbRecette()
+        {
+            string nbRecette = "";
+            String query = "select count(*) from recette";
+            DataTable dt = ExecuteCommand(query);
+            try
+            {
+                nbRecette = dt.Rows[0][0].ToString();
+            }
+            catch
+            {
+
+            }
+            if (nbRecette == "") nbRecette = "None";
+            return nbRecette;
+        }
+
+        public string GetNbCdr()
+        {
+            string nbCdr = "";
+            String query = "select count(*) from client where createur = 1";
+            DataTable dt = ExecuteCommand(query);
+            try
+            {
+                nbCdr = dt.Rows[0][0].ToString();
+            }
+            catch
+            {
+
+            }
+            if (nbCdr == "") nbCdr = "None";
+            return nbCdr;
+        }
+
     }
 }

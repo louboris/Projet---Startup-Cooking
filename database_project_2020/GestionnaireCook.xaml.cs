@@ -25,7 +25,7 @@ namespace database_project_2020
         {
 
             InitializeComponent();
-            DBClass database = new DBClass();
+            //DBClass database = new DBClass();
             DataTable recette = database.ExecuteCommand("select recette.nom,commande.recetteID , sum(commande.quantite) as qt from commande join recette order by qt limit 5;");
             dtgTop5.DataContext = recette.DefaultView;
             tbCdrOr.Text = "Cdr OR : " + database.GetCdrOr();

@@ -15,10 +15,10 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="368"></RowDefinition>
         </Grid.RowDefinitions>
-  
+
         <!-- nbClient-->
         <Grid Name="Page1" Grid.Row="1" Background="Red">
-            
+            <TextBlock Name="tbNbClient" Text="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
         </Grid>
         <Button Name="btPage1_2" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Right" Visibility="Visible" Click="BtPage1_2_Click">
             <TextBlock Text="&gt;"/>
@@ -28,7 +28,17 @@
             <TextBlock Text="&lt;"/>
         </Button>
         <Grid Name="Page2" Grid.Row="1" Background="Gray" Visibility="Hidden">
-            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition  Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="Bisque">
+                    <TextBlock Name="tbNbCdr" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="{Binding}"/>
+                </Grid>
+                <DataGrid Grid.Row="1" Name="dtNomCdrNbRecette" ItemsSource="{Binding}"/>
+
+            </Grid>
         </Grid>
         <Button Name="btPage2_3" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Right" Visibility="Hidden" Click="BtPage2_3_Click">
             <TextBlock Text="&gt;"/>
@@ -37,8 +47,8 @@
         <Button Name="btPage3_2" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Left" Visibility="Hidden" Click="BtPage3_2_Click" >
             <TextBlock Text="&lt;"/>
         </Button>
-        <Grid Name="Page3" Grid.Row="1" Background="Black" Visibility="Hidden">
-
+        <Grid Name="Page3" Grid.Row="1" Background="Bisque" Visibility="Hidden">
+            <TextBlock Name="tbNbRecette" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding}"/>
         </Grid>
         <Button Name="btPage3_4" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Right" Visibility="Hidden" Click="BtPage3_4_Click">
             <TextBlock Text="&gt;"/>
@@ -58,6 +68,19 @@
             <TextBlock Text="&lt;"/>
         </Button>
         <Grid Name="Page5" Grid.Row="1" Background="Cyan" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Saisissez un produit :" VerticalAlignment="Center"/>
+                <TextBox Name="tbxProduit" Height="20" Width="100" VerticalAlignment="Center"/>
+                <Button Name ="btProduit" Click="BtProduit_Click"/>
+            </StackPanel>
+            <DataGrid Grid.Row="1"  Name="dtlisteingredient" ItemsSource="{Binding}"/>
+            <DataGrid Grid.Row="2" Name="dtListIngrRecetteQt" ItemsSource="{Binding}"/>
+
 
         </Grid>
     </Grid>
