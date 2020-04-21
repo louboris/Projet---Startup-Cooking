@@ -47,3 +47,5 @@ E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\database_pro
 E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\database_project_2020.csproj.CopyComplete
 E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\database_project_2020.exe
 E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\database_project_2020.pdb
+E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\ModeDemo.g.cs
+E:\sauvegarde\database_project_2020\database_project_2020\obj\Debug\ModeDemo.baml
