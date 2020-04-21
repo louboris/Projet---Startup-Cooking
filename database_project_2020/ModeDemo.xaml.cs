@@ -42,7 +42,7 @@ namespace database_project_2020
         }
         private void RefreshPage4()
         {
-
+            dtListPage4.DataContext = database.ExecuteCommand("select * from ingredient where stockActuel <= stockMin * 2;");
         }
         private void RefreshPage5()
         {
@@ -95,6 +95,7 @@ namespace database_project_2020
 
         private void BtPage3_4_Click(object sender, RoutedEventArgs e)
         {
+            RefreshPage4();
             Page4.Visibility = Visibility.Visible;
             btPage4_3.Visibility = Visibility.Visible;
             btPage4_5.Visibility = Visibility.Visible;
@@ -127,6 +128,7 @@ namespace database_project_2020
 
         private void BtPage5_4_Click(object sender, RoutedEventArgs e)
         {
+            RefreshPage4();
             Page4.Visibility = Visibility.Visible;
             btPage4_3.Visibility = Visibility.Visible;
             btPage4_5.Visibility = Visibility.Visible;

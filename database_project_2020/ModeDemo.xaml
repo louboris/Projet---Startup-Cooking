@@ -58,7 +58,19 @@
             <TextBlock Text="&lt;"/>
         </Button>
         <Grid Name="Page4" Grid.Row="1" Background="Yellow" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="Bisque">
+                    <TextBlock Text="Liste produit &lt;= 2 * quantite minimale" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
 
+                </Grid>
+                <DataGrid Grid.Row="1" Name="dtListPage4" ItemsSource="{Binding}"/>
+
+
+            </Grid>
         </Grid>
         <Button Name="btPage4_5" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Right" Visibility="Hidden" Click="BtPage4_5_Click">
             <TextBlock Text="&gt;"/>
@@ -74,9 +86,11 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="Saisissez un produit :" VerticalAlignment="Center"/>
+                <TextBlock Text="Saisissez un produit :" VerticalAlignment="Center" FontWeight="bold"/>
                 <TextBox Name="tbxProduit" Height="20" Width="100" VerticalAlignment="Center"/>
-                <Button Name ="btProduit" Click="BtProduit_Click"/>
+                <Button Name ="btProduit" Click="BtProduit_Click" Height="20" Width="50" Margin="2" >
+                    <TextBlock Text="Valider" FontWeight="Bold"/>
+                </Button>
             </StackPanel>
             <DataGrid Grid.Row="1"  Name="dtlisteingredient" ItemsSource="{Binding}"/>
             <DataGrid Grid.Row="2" Name="dtListIngrRecetteQt" ItemsSource="{Binding}"/>
