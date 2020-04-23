@@ -35,6 +35,10 @@ namespace database_project_2020
             //Init cdr OR
             DataTable recette5cdrOr = database.ExecuteCommand("select recette.recetteID,recette.nom,recette.prix,t1.qt from recette join (select commande.recetteID, sum(commande.quantite) as qt from commande join cdrOr) as t1 order by t1.qt desc limit 5");
             dtCdrOrRecette.DataContext = recette5cdrOr.DefaultView;
+
+            //suite init
+
+            tbLastMaj.Text = "Dernière Maj : " + database.ExecuteCommand("select DATE_FORMAT(majdate, 'Le %d %M %Y') from ingredient order by majdate desc limit 1;").Rows[0][0].ToString();
         }
 
         private void BtMenu1_Click(object sender, RoutedEventArgs e)
@@ -105,6 +109,18 @@ namespace database_project_2020
                     break;
 
             }
+        }
+
+        private void MajQt_Click(object sender, RoutedEventArgs e)
+        {
+            database.MajHebdo();
+            tbLastMaj.Text = "Dernière Maj : " + database.ExecuteCommand("select DATE_FORMAT(majdate, 'Le %d %M %Y') from ingredient order by majdate desc limit 1;").Rows[0][0].ToString();
+        }
+
+        private void BtListeCommande_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable commande = database.ExecuteCommand("select * from ListeCommande");
+            commande.WriteXml("commande.xml");
         }
     }
 }

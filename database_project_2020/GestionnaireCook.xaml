@@ -90,9 +90,30 @@
             </Grid>
 
         </Grid>
-        
+        <!-- menu Rea hebdo-->
+
+        <Grid Grid.Row="1" Name="ReaHebdo" Visibility="Visible" Background="CadetBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="MajQt" Grid.Column="0" Click="MajQt_Click" >
+
+                <StackPanel>
+                    <TextBlock Text="Maj Quantité" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding}" Name="tbLastMaj"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btListeCommande" Grid.Column="1" Click="BtListeCommande_Click">
+                <TextBlock Text="Edition liste de commande format XML" FontWeight="Bold"/>
+                
+            </Button>
+
+
+        </Grid>
+
         <!--Menu supprimer-->
-        <Grid Grid.Row="1" Name="MenuSupprimer" Visibility="Visible" Background="Red">
+        <Grid Grid.Row="1" Name="MenuSupprimer" Visibility="Hidden" Background="Red">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
              

@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <listecommande>
+    <fournisseur>fournisseur de Jambon</fournisseur>
+    <refFournisseur>jambon.com</refFournisseur>
+    <nom>Jambon De Seranno</nom>
+    <ingredientID>5</ingredientID>
+    <qtCommandée>19</qtCommandée>
+  </listecommande>
+  <listecommande>
+    <fournisseur>fournisseur de Jambon</fournisseur>
+    <refFournisseur>jambon.com</refFournisseur>
+    <nom>Jambon De Seranno</nom>
+    <ingredientID>6</ingredientID>
+    <qtCommandée>19</qtCommandée>
+  </listecommande>
+</DocumentElement>

@@ -61,5 +61,11 @@ namespace database_project_2020
             }
 
         }
+
+        private void BtnNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            Inscription nouvelUtilisateur = new Inscription();
+            nouvelUtilisateur.Show();
+        }
     }
 }

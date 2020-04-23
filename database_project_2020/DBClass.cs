@@ -50,10 +50,34 @@ namespace database_project_2020
                 createur = true;
             }
             User utilisateurC = new User(utilisateurConnect.Rows[0][0].ToString(), utilisateurConnect.Rows[0][2].ToString(), Convert.ToInt32(utilisateurConnect.Rows[0][3].ToString()), createur);
-
+            dt.WriteXml("test.xml");
             return utilisateurC;
         }
+        public bool CreateUser(string username,string password,string nom,string numero)
+        {
+            string query = "INSERT into client(username,password,nom,numero) values( @username , SHA1( @password ), @nom , @numero );";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@nom", nom);
+            cmd.Parameters.AddWithValue("@numero", numero);
 
+            connection.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                connection.Close();
+                return false;
+            }
+            
+        }
         public string GetCdrOr()
         {
             string cdrOR = "";
@@ -278,6 +302,28 @@ namespace database_project_2020
             }
             if (nbCdr == "") nbCdr = "None";
             return nbCdr;
+        }
+
+        public void MajHebdo()
+        {
+            String query = "CALL ReaHebdo();";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+        
+
+            connection.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Mise à jour effectuée.");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                connection.Close();
+
+            }
         }
 
     }
