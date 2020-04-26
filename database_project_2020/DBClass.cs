@@ -49,7 +49,7 @@ namespace database_project_2020
             {
                 createur = true;
             }
-            User utilisateurC = new User(utilisateurConnect.Rows[0][0].ToString(), utilisateurConnect.Rows[0][2].ToString(), Convert.ToInt32(utilisateurConnect.Rows[0][3].ToString()), createur);
+            User utilisateurC = new User(utilisateurConnect.Rows[0][0].ToString(), utilisateurConnect.Rows[0][2].ToString(), Convert.ToInt32(utilisateurConnect.Rows[0][3].ToString()), createur, Convert.ToInt32(utilisateurConnect.Rows[0][5].ToString()));
             dt.WriteXml("test.xml");
             return utilisateurC;
         }
@@ -348,17 +348,44 @@ namespace database_project_2020
             }
         }
 
-        public void AddIngredient_Recette(DataTable listeIngredient)
+        public void AddIngredient_Recette(DataTable listeIngredient,int recetteID)
         {
+           
             foreach (DataRow row in listeIngredient.Rows)
             {
+                
+                
                 if(row[11].ToString() != "")
                 {
-                    MessageBox.Show(row[11].ToString());
+                    String query = "call Ajouter_Ingredient_Recette(@recetteId,@ingredientId,@quantite)";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@recetteId", recetteID);
+                    cmd.Parameters.AddWithValue("@ingredientId", Convert.ToInt32(row[0].ToString()));
+                    cmd.Parameters.AddWithValue("@quantite", Convert.ToInt32(row[11].ToString()));
+             
+                    connection.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                    catch
+                    {
+                        connection.Close();
+                    }
+
                 }
                 //items.Add(new Recette() { Id = Convert.ToInt32(row[0].ToString()), Nom = row[1].ToString(), TypeR = row[2].ToString(), Descriptif = row[3].ToString(), Prix = Convert.ToInt32(row[4].ToString()) });
-
+             
             }
+        }
+        
+        public int GetLastRecipe()
+        {
+            DataTable result = ExecuteCommand(" select max(recette.recetteID) from recette;");
+
+            return Convert.ToInt32(result.Rows[0][0].ToString());
         }
     }
 }

@@ -13,13 +13,14 @@ namespace database_project_2020
         public int numero = 0;
         public bool createur = false;
         public bool gestionnaire = false;
-
-        public User(string username, string nom, int numero, bool createur = false)
+        public int soldeCdr = 0;
+        public User(string username, string nom, int numero, bool createur = false, int solde = 0)
         {
             this.username = username;
             this.nom = nom;
             this.numero = numero;
             this.createur = createur;
+            this.soldeCdr = solde;
         }
 
         public string Nom

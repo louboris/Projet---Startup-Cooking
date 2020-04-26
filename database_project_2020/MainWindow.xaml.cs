@@ -40,6 +40,8 @@ namespace database_project_2020
             DataTable recette = database.ExecuteCommand("select * from recette");
             dtGrid.DataContext = recette;
 
+            //initialiser solde CDR
+            tbSoldeCdr.Text = "Votre solde est de : " + Convert.ToString(utilisateur.soldeCdr) +" Cookpoint.";
             
 
             foreach (DataRow row in recette.Rows)
@@ -153,16 +155,20 @@ namespace database_project_2020
 
         private void CreatorSpace_Click(object sender, RoutedEventArgs e)
         {
-            Nouvelle_Recette.Visibility = Visibility.Visible;
+            Recette_Liste.Visibility = Visibility.Hidden;
+            Espace_Cdr.Visibility = Visibility.Visible;
             BackNouvelleRecette.Visibility = Visibility.Visible;
+            Panier.Visibility = Visibility.Hidden;
 
         }
 
         private void BackNouvelleRecette_Click(object sender, RoutedEventArgs e)
         {
-            Nouvelle_Recette.Visibility = Visibility.Hidden;
+            Espace_Cdr.Visibility = Visibility.Hidden;
             Recette_Liste.Visibility = Visibility.Visible;
             BackNouvelleRecette.Visibility = Visibility.Hidden;
+            Panier.Visibility = Visibility.Visible;
+            Recette_Liste.Visibility = Visibility.Visible;
         }
 
 
@@ -183,7 +189,7 @@ namespace database_project_2020
                 MessageBox.Show(ex.Message);
             }
 
-            databaseMain.AddIngredient_Recette(dtIngredient);
+            databaseMain.AddIngredient_Recette(dtIngredient,databaseMain.GetLastRecipe());
         }
 
         private void Finaliser_Click(object sender, RoutedEventArgs e)
@@ -275,6 +281,29 @@ namespace database_project_2020
         {
             Creation_ingredient.Visibility = Visibility.Hidden;
             AjoutIngredient.Visibility = Visibility.Visible;
+        }
+
+        private void BackCreerRecetteCdr_Click(object sender, RoutedEventArgs e)
+        {
+            Nouvelle_Recette.Visibility = Visibility.Hidden;
+            Espace_Cdr.Visibility = Visibility.Visible;
+            BackCreerRecetteCdr.Visibility = Visibility.Hidden;
+            BackNouvelleRecette.Visibility = Visibility.Visible;
+        }
+
+        private void Bt_Cdr_VisualiserRecette_Click(object sender, RoutedEventArgs e)
+        {
+            Espace_Cdr.Visibility = Visibility.Hidden;
+            // Rajouter ici visibilité pour 
+
+        }
+
+        private void Bt_Cdr_CreerRecette_Click(object sender, RoutedEventArgs e)
+        {
+            BackNouvelleRecette.Visibility = Visibility.Hidden;
+            BackCreerRecetteCdr.Visibility = Visibility.Visible;
+            Espace_Cdr.Visibility = Visibility.Hidden;
+            Nouvelle_Recette.Visibility = Visibility.Visible;
         }
     }
 }

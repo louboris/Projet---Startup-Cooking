@@ -35,6 +35,7 @@
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackPanier" Visibility="Hidden" Click="BtnBackPanier_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackNouvelleRecette" Visibility="Hidden" Click="BackNouvelleRecette_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackRecetteFinaliser" Visibility="Hidden" Click="BackRecetteFinaliser_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
+                    <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackCreerRecetteCdr" Visibility="Hidden" Click="BackCreerRecetteCdr_Click"  Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
 
                     <Button Visibility="Hidden" Grid.Column="1" BorderThickness="0" Margin="300,0" Name="CreatorSpace" Background="Transparent" Click="CreatorSpace_Click" Content="Espace Createur" Foreground="#F29F05" FontSize="18" FontWeight="Bold"/>
                     <Button Name="Panier" Grid.Column="2" Click="BtnPanier_Click" Content="Panier" Foreground="#265902" Background="Transparent" BorderThickness="0" FontSize="18"  HorizontalAlignment="Left" Width="71" FontWeight="Bold" />
@@ -44,7 +45,7 @@
             </StackPanel>
 
             <!-- Liste recette -->
-            <StackPanel Grid.Row="1" Name="Recette_Liste" Visibility="Hidden">
+            <StackPanel Grid.Row="1" Name="Recette_Liste" Visibility="Visible">
                 <ContentControl>
                     <ContentControl.Resources>
 
@@ -187,7 +188,7 @@
             </Border>
 
             <!-- Nouvelle recette -->
-            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Nouvelle_Recette" Visibility="Visible"  >
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Nouvelle_Recette" Visibility="Hidden"  >
                 <StackPanel>
                     <Label Content="Nom Recette :"/>
                     <TextBox Name="txNomRecette"/>
@@ -256,7 +257,41 @@
 
                 </Grid>
             </Border>
+            
+            <!--ESPACE CDR -->
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Espace_Cdr" Visibility="Hidden"  >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="bt_Cdr_CreerRecette" Margin="20" Click="Bt_Cdr_CreerRecette_Click">
+                       
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Background="Bisque">
+                                    <ContentPresenter  Content="Créer une Recette" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                       
+                    </Button>
+                    <TextBlock Name="tbSoldeCdr" Text="{Binding}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Name="bt_Cdr_VisualiserRecette" Grid.Column="2" Margin="20" Click="Bt_Cdr_VisualiserRecette_Click">
 
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Background="Bisque">
+                                    <ContentPresenter Content="Visualiser Recette" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                
+                            </ControlTemplate>
+                        </Button.Template>
+                        
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
     </StackPanel>
 
