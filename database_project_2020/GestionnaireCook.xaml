@@ -16,11 +16,17 @@
             <RowDefinition Height="368"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- Fleches retours-->
-        <Button Name="btBackTdBsMP" Grid.Row="0" Background="Red" Width="50" HorizontalAlignment="Left" Visibility="Hidden" Click="Button_Click_1">
+        <Button Name="btBackTdBsMP" Grid.Row="0" Background="Gray" Width="50" HorizontalAlignment="Left" Visibility="Hidden" Click="Button_Click_1">
+            <TextBlock Text="retour"/>
+        </Button>
+        <Button Name="btBackRea" Grid.Row="0" Background="Gray" Width="50" HorizontalAlignment="Left" Visibility="Hidden" Click="BtBackRea_Click">
+            <TextBlock Text="retour"/>
+        </Button>
+        <Button Name="btBackSupp" Grid.Row="0" Background="Gray" Width="50" HorizontalAlignment="Left" Visibility="Hidden" Click="BtBackSupp_Click">
             <TextBlock Text="retour"/>
         </Button>
         <!-- Menu principal-->
-        <Grid Grid.Row="1" Background="Azure" Name="MenuPrincipal" Visibility="Hidden">
+        <Grid Grid.Row="1" Background="Azure" Name="MenuPrincipal" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition  />
                 <ColumnDefinition/>
@@ -28,17 +34,17 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="50px"/>
+               
             </Grid.RowDefinitions>
 
             <Button Name="btMenu1" Grid.Column="0" Grid.Row="0" Background="Aquamarine" Click="BtMenu1_Click">
                 <TextBlock Text="Tableau de Bord hebdo "/>
             </Button>
-            <Button Name="btMenu2" Grid.Column="1" Grid.Row="0" Background="Aquamarine">
-                <TextBlock Text="Menu 1 "/>
+            <Button Name="btMenu2" Grid.Column="1" Grid.Row="0" Background="Aquamarine" Click="BtMenu2_Click">
+                <TextBlock Text="Menu Rea "/>
             </Button>
-            <Button Name="btMenu3" Grid.Column="2" Grid.Row="0" Background="Aquamarine">
-                <TextBlock Text="Menu 1 "/>
+            <Button Name="btMenu3" Grid.Column="2" Grid.Row="0" Background="Aquamarine" Click="BtMenu3_Click">
+                <TextBlock Text="Menu Supprimer "/>
             </Button>
 
 
@@ -88,11 +94,28 @@
                 </Grid>
 
             </Grid>
+            <Grid Grid.Column="1" Grid.Row="1" Background="Bisque">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Upgrader un client "  HorizontalAlignment="Center" FontWeight="Bold" Background="Bisque"/>
+
+                <StackPanel Grid.Row="1" Background="BlanchedAlmond">
+                    <Label/>
+                    <Label Content="Pseudo du client :"/>
+                    <Label/>
+                    <TextBox Name="tbUpgradeCdr"/>
+                    <Label/>
+                    <Button Name="btUpgradeCdr" Click="BtUpgradeCdr_Click" Height="20" Content="Upgrader" Width="65"/>
+                </StackPanel>
+            </Grid>
+
 
         </Grid>
         <!-- menu Rea hebdo-->
 
-        <Grid Grid.Row="1" Name="ReaHebdo" Visibility="Visible" Background="CadetBlue">
+        <Grid Grid.Row="1" Name="ReaHebdo" Visibility="Hidden" Background="CadetBlue">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -131,9 +154,12 @@
                 </Grid.RowDefinitions>
                 <TextBlock Background="Bisque" Text="Supprimer Recette" TextAlignment="Center" FontWeight="Bold"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock Text="ID de la recette à supprimer"/>
-                    <TextBox Width="200" Name="tbRecetteIDSupp"/>
-                    <Button Name="btValidationSuppR" Click="BtValidationSuppR_Click"  Width="30" Height="30"/>
+                    <Label Width="10"/>
+                    <TextBlock Text="ID de la recette à supprimer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Width="10"/>
+                    <TextBox Width="200" Name="tbRecetteIDSupp" Height="30"/>
+                    <Label Width="10"/>
+                    <Button Name="btValidationSuppR" Click="BtValidationSuppR_Click"  Width="100" Height="30" Content="Supprimer"/>
                 </StackPanel>
                 
             </Grid>
@@ -145,10 +171,14 @@
                 </Grid.RowDefinitions>
                 <TextBlock Background="Bisque" Text="Supprimer Cuisinier" TextAlignment="Center" FontWeight="Bold"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock Text="ID du cuisinier a supprimer"/>
-                    <TextBox Width="200" Name="tbSupprimerCuisinier"/>
-                    <Button Name="btValidationSuppC" Click="BtValidationSuppC_Click"  Width="30" Height="30"/>
-                    <Button Name="btValidationDownC" Click="BtValidationDownC_Click"  Width="30" Height="30"/>
+                    <Label Width="10"/>
+                    <TextBlock Text="ID du cuisinier a supprimer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Width="10"/>
+                    <TextBox Width="200" Name="tbSupprimerCuisinier" Height="30"/>
+                    <Label Width="10"/>
+                    <Button Name="btValidationSuppC" Click="BtValidationSuppC_Click"  Width="100" Height="30" Content="Supprimer"/>
+                    <Label Width="10"/>
+                    <Button Name="btValidationDownC" Click="BtValidationDownC_Click"  Width="100" Height="30" Content="DownGrader"/>
 
                 </StackPanel>
             </Grid>

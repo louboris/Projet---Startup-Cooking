@@ -45,7 +45,7 @@ namespace database_project_2020
             connection.Close();
             DataTable utilisateurConnect = dt;
             bool createur = false;
-            if (Convert.ToInt32(utilisateurConnect.Rows[0][4].ToString()) == 0)
+            if (Convert.ToInt32(utilisateurConnect.Rows[0][4].ToString()) == 1)
             {
                 createur = true;
             }
@@ -386,6 +386,28 @@ namespace database_project_2020
             DataTable result = ExecuteCommand(" select max(recette.recetteID) from recette;");
 
             return Convert.ToInt32(result.Rows[0][0].ToString());
+        }
+
+        public void Upgrade(string clientID)
+        {
+            String query = "update client set client.createur = 1 where client.username = @clientID";
+            connection.Open();
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@clientID", clientID);
+
+
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Le client est maintenant CdR.");
+            }
+            catch
+            {
+                connection.Close();
+            }
         }
     }
 }

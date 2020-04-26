@@ -122,5 +122,39 @@ namespace database_project_2020
             DataTable commande = database.ExecuteCommand("select * from ListeCommande");
             commande.WriteXml("commande.xml");
         }
+
+        private void BtMenu2_Click(object sender, RoutedEventArgs e)
+        {
+            ReaHebdo.Visibility = Visibility.Visible;
+            btBackRea.Visibility = Visibility.Visible;
+            MenuPrincipal.Visibility = Visibility.Hidden;
+        }
+
+        private void BtBackRea_Click(object sender, RoutedEventArgs e)
+        {
+            ReaHebdo.Visibility = Visibility.Hidden;
+            btBackRea.Visibility = Visibility.Hidden;
+            MenuPrincipal.Visibility = Visibility.Visible;
+        }
+
+        private void BtBackSupp_Click(object sender, RoutedEventArgs e)
+        {
+            MenuSupprimer.Visibility = Visibility.Hidden;
+            btBackSupp.Visibility = Visibility.Hidden;
+            MenuPrincipal.Visibility = Visibility.Visible;
+        }
+
+        private void BtMenu3_Click(object sender, RoutedEventArgs e)
+        {
+            MenuSupprimer.Visibility = Visibility.Visible;
+            btBackSupp.Visibility = Visibility.Visible;
+            MenuPrincipal.Visibility = Visibility.Hidden;
+        }
+
+        private void BtUpgradeCdr_Click(object sender, RoutedEventArgs e)
+        {
+            database.Upgrade(tbUpgradeCdr.Text);
+
+        }
     }
 }

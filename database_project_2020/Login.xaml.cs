@@ -39,7 +39,9 @@ namespace database_project_2020
                     User utilisateur = databaseLogin.GetUser(txUsername.Text, txPasseword.Password);
                     if(utilisateur.username == "admin")
                     {
-
+                        GestionnaireCook gestionnaire = new GestionnaireCook();
+                        gestionnaire.Show();
+                        this.Close();
                     }
                     else {
                         MainWindow dashBoard = new MainWindow(utilisateur);
@@ -66,6 +68,13 @@ namespace database_project_2020
         {
             Inscription nouvelUtilisateur = new Inscription();
             nouvelUtilisateur.Show();
+        }
+
+        private void BtDEMO_Click(object sender, RoutedEventArgs e)
+        {
+            ModeDemo demo = new ModeDemo();
+            demo.Show();
+            this.Close();
         }
     }
 }
