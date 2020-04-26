@@ -326,5 +326,39 @@ namespace database_project_2020
             }
         }
 
+        public void AddIngredient(string nom, string type,string unite)
+        {
+            String query = "INSERT INTO ingredient(nom,categorie,unite,stockMin,stockMax,lastUse,majdate) values (@nom,@type,@unite,0,0,date(now()),date(now()))" ;
+            connection.Open();
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@nom", nom);
+            cmd.Parameters.AddWithValue("@type", type);
+            cmd.Parameters.AddWithValue("@unite", unite);
+      
+            
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch
+            {
+                connection.Close();
+            }
+        }
+
+        public void AddIngredient_Recette(DataTable listeIngredient)
+        {
+            foreach (DataRow row in listeIngredient.Rows)
+            {
+                if(row[11].ToString() != "")
+                {
+                    MessageBox.Show(row[11].ToString());
+                }
+                //items.Add(new Recette() { Id = Convert.ToInt32(row[0].ToString()), Nom = row[1].ToString(), TypeR = row[2].ToString(), Descriptif = row[3].ToString(), Prix = Convert.ToInt32(row[4].ToString()) });
+
+            }
+        }
     }
 }

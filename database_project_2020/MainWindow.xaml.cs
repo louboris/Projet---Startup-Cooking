@@ -56,10 +56,7 @@ namespace database_project_2020
                 CreatorSpace.Visibility = Visibility.Visible;
             }
 
-
-            dtIngredient = database.ExecuteCommand("select * from ingredient");
-            dtIngredient.Columns.Add("Quantite", typeof(int));
-            dgIngredient.DataContext = dtIngredient;
+            ChargementIngredient();
 
         }
 
@@ -72,7 +69,14 @@ namespace database_project_2020
         {
 
         }
-                
+        private void ChargementIngredient()
+        {
+
+            dtIngredient = databaseMain.ExecuteCommand("select * from ingredient");
+            dtIngredient.Columns.Add("Quantite", typeof(int));
+            
+            dgIngredient.DataContext = dtIngredient;
+        }
         private void Recette(Recette rec)
         {
             Recette_Active = rec;
@@ -178,6 +182,8 @@ namespace database_project_2020
             {
                 MessageBox.Show(ex.Message);
             }
+
+            databaseMain.AddIngredient_Recette(dtIngredient);
         }
 
         private void Finaliser_Click(object sender, RoutedEventArgs e)
@@ -215,12 +221,60 @@ namespace database_project_2020
 
         private void BtIngredient_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("test");
+            Ajout_ingredient.Visibility = Visibility.Hidden;
+            Nouvelle_Recette.Visibility = Visibility.Visible;
         }
 
         private void AjoutIngredient_Click(object sender, RoutedEventArgs e)
         {
+            Creation_ingredient.Visibility = Visibility.Visible;
+            AjoutIngredient.Visibility = Visibility.Hidden;
+        }
 
+        private void BtCreerIngredient_Click(object sender, RoutedEventArgs e)
+        {
+            databaseMain.AddIngredient(Nom_Ingredient.Text,ListeCategorieIngr.Text,cbUnite.Text);
+            Nom_Ingredient.Text = "";
+            
+            Creation_ingredient.Visibility = Visibility.Hidden;
+            AjoutIngredient.Visibility = Visibility.Visible;
+            ChargementIngredient();
+        }
+
+        private void ListeCategorieIngr_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> listeCategorie = new List<string>();
+            listeCategorie.Add("Salade");
+            listeCategorie.Add("Viande");
+            listeCategorie.Add("Légume");
+            listeCategorie.Add("Fruit");
+            var combo = sender as ComboBox;
+            combo.ItemsSource = listeCategorie;
+            combo.SelectedIndex = 0;
+        }
+
+        private void CbUnite_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> Unite = new List<string>();
+            Unite.Add("Kg");
+            Unite.Add("g");
+            Unite.Add("L");
+            Unite.Add("mL");
+            var combo = sender as ComboBox;
+            combo.ItemsSource = Unite;
+            combo.SelectedIndex = 0;
+        }
+
+        private void BtMenuIngredient_Click(object sender, RoutedEventArgs e)
+        {
+            Ajout_ingredient.Visibility = Visibility.Visible;
+            Nouvelle_Recette.Visibility = Visibility.Hidden;
+        }
+
+        private void BtAnnulerCreerIngredient_Click(object sender, RoutedEventArgs e)
+        {
+            Creation_ingredient.Visibility = Visibility.Hidden;
+            AjoutIngredient.Visibility = Visibility.Visible;
         }
     }
 }

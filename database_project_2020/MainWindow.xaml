@@ -187,7 +187,7 @@
             </Border>
 
             <!-- Nouvelle recette -->
-            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Nouvelle_Recette" Visibility="Hidden"  >
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Nouvelle_Recette" Visibility="Visible"  >
                 <StackPanel>
                     <Label Content="Nom Recette :"/>
                     <TextBox Name="txNomRecette"/>
@@ -197,13 +197,17 @@
                     <TextBox Name="txPrixNouvelle"/>
                     <Label Content="Descriptif :"/>
                     <TextBox Name="txDescriptifNouvelle" Height="125"/>
-                    <Button Name ="btEnvoiNvRecette" Click="BtEnvoiNvRecette_Click" Height="40" Margin="0,10,10,10" HorizontalAlignment="Right" FontWeight="Bold" Width="100" Content="Envoyer" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
+                    <Grid>
+                        <Button Name="btMenuIngredient" Click="BtMenuIngredient_Click" Height="40" Margin="10,10,10,10" HorizontalAlignment="Left" FontWeight="Bold" Width="100" Content="Ingredient" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
+
+                        <Button Name ="btEnvoiNvRecette" Click="BtEnvoiNvRecette_Click" Height="40" Margin="0,10,10,10" HorizontalAlignment="Right" FontWeight="Bold" Width="100" Content="Envoyer" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
+                    </Grid>
                 </StackPanel>
 
             </Border>
 
             <!-- Ajout ingredient nouvelle recette -->
-            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Ajout_ingredient" Visibility="Visible"  >
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Ajout_ingredient" Visibility="Hidden"  >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10*"/>
@@ -219,14 +223,39 @@
                         </DataGrid.Columns>
 
                     </DataGrid>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" >
-                        <Button Name="AjoutIngredient" Click="AjoutIngredient_Click" Background="Red" Width="100"/>
-                        <Button Name="btIngredient" Click="BtIngredient_Click" Background="Aquamarine" Width="100"/>
-                    </StackPanel>
+                    <Grid  Grid.Row="1" >
+                        <Button HorizontalAlignment="Left" Name="AjoutIngredient" Click="AjoutIngredient_Click" FontWeight="Bold" Width="100"  Content="Creer" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
+                        <Button HorizontalAlignment="Right" Name="btIngredient" Click="BtIngredient_Click"   FontWeight="Bold" Width="100" Content="Retour" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
+                    </Grid>
 
                 </Grid>
             </Border>
+            <!-- Création ingrédient -->
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Creation_ingredient" Visibility="Hidden"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                
+                        <Label Content="Nom de l'ingredient"/>
+                        <TextBox  Name="Nom_Ingredient"/>
+                        <Label Content="Catégorie"/>
+                        <ComboBox Name="ListeCategorieIngr"  ItemsSource="{Binding}" Loaded="ListeCategorieIngr_Loaded"/>
+                        <Label Content="Unité applicable à ce produit"/>
+                        <ComboBox Name="cbUnite" ItemsSource="{Binding}" Loaded="CbUnite_Loaded"/>
+                    </StackPanel>
+                   
 
+                    <Grid  Grid.Row="1" >
+                        <Button HorizontalAlignment="Right" Name="btCreerIngredient" Click="BtCreerIngredient_Click"  Background="Bisque" Width="100" Content="Ajouter"/>
+                        <Button HorizontalAlignment="Left" Name="btAnnulerCreerIngredient" Click="BtAnnulerCreerIngredient_Click"  Background="Bisque" Width="100" Content="Annuler" />
+
+                    </Grid>
+
+                </Grid>
+            </Border>
 
         </Grid>
     </StackPanel>
