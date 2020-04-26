@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:database_project_2020"
         mc:Ignorable="d"
-        Title="Login" Height="320" Width="300" FontSize ="14" Background="#40030E">
+        Title="Login" Height="330" Width="300" FontSize ="14" Background="#40030E">
     <Border Background="#8C1C03" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
             <Label Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center"></Label>

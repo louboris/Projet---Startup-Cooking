@@ -27,8 +27,10 @@ namespace database_project_2020
         public Panier Panier_Actif { get; set; }
         DBClass databaseMain = new DBClass();
         User utilisateurActif;
+        DataTable dtIngredient = new DataTable();
         public MainWindow(User utilisateur)
-        {
+        {   
+            //ff
             utilisateurActif = utilisateur;
             InitializeComponent();
             Panier_Actif = new Panier();
@@ -37,6 +39,8 @@ namespace database_project_2020
             DBClass database = new DBClass();
             DataTable recette = database.ExecuteCommand("select * from recette");
             dtGrid.DataContext = recette;
+
+            
 
             foreach (DataRow row in recette.Rows)
             {
@@ -51,6 +55,11 @@ namespace database_project_2020
             {
                 CreatorSpace.Visibility = Visibility.Visible;
             }
+
+
+            dtIngredient = database.ExecuteCommand("select * from ingredient");
+            dtIngredient.Columns.Add("Quantite", typeof(int));
+            dgIngredient.DataContext = dtIngredient;
 
         }
 
@@ -180,6 +189,36 @@ namespace database_project_2020
         }
 
         private void BackRecetteFinaliser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //        Test
+        
+        
+        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {/*
+            foreach (MyObject item in e.RemovedItems)
+            {
+                lstMyObject.Remove(item);
+            }
+
+            foreach (MyObject item in e.AddedItems)
+            {
+                lstMyObject.Add(item);
+            }*/
+        }
+
+        private void Quantite_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void BtIngredient_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("test");
+        }
+
+        private void AjoutIngredient_Click(object sender, RoutedEventArgs e)
         {
 
         }

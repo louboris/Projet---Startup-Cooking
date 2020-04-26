@@ -20,11 +20,11 @@
 
 
             <StackPanel Orientation="Horizontal" Background="#40030E">
-                <!-- Boutons retours sur menu -->                
+                <!-- Boutons retours sur menu -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="1000"/>                        
+                        <ColumnDefinition Width="1000"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
             </StackPanel>
 
             <!-- Liste recette -->
-            <StackPanel Grid.Row="1" Name="Recette_Liste">
+            <StackPanel Grid.Row="1" Name="Recette_Liste" Visibility="Hidden">
                 <ContentControl>
                     <ContentControl.Resources>
 
@@ -137,7 +137,7 @@
                                             <TextBlock Text="Total" Foreground="#33B6EF" FontSize="10"/>
                                             <TextBlock Text="{Binding Total}" FontSize="20" />
                                         </StackPanel>
-                                     
+
                                     </Grid>
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="5" ShadowDepth="5" />
@@ -185,7 +185,7 @@
                 </StackPanel>
 
             </Border>
-            
+
             <!-- Nouvelle recette -->
             <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Nouvelle_Recette" Visibility="Hidden"  >
                 <StackPanel>
@@ -199,9 +199,33 @@
                     <TextBox Name="txDescriptifNouvelle" Height="125"/>
                     <Button Name ="btEnvoiNvRecette" Click="BtEnvoiNvRecette_Click" Height="40" Margin="0,10,10,10" HorizontalAlignment="Right" FontWeight="Bold" Width="100" Content="Envoyer" Foreground="#40030E" FontSize="20" BorderThickness="0" Background="Transparent"/>
                 </StackPanel>
-             
+
             </Border>
 
+            <!-- Ajout ingredient nouvelle recette -->
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Ajout_ingredient" Visibility="Visible"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" Name="dgIngredient" ItemsSource="{Binding}" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"  Binding="{Binding ingredientID}"/>
+                            <DataGridTextColumn Header="Nom" Binding="{Binding nom}" />
+                            <DataGridTextColumn Header="Quantite" Binding="{Binding Quantite}" />
+
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" >
+                        <Button Name="AjoutIngredient" Click="AjoutIngredient_Click" Background="Red" Width="100"/>
+                        <Button Name="btIngredient" Click="BtIngredient_Click" Background="Aquamarine" Width="100"/>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
 
 
         </Grid>
