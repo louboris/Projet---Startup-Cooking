@@ -15,13 +15,17 @@ namespace database_project_2020
         public MySqlConnection connection;
         public DBClass()
         {
-            string connectionString = "SERVER=localhost;DATABASE=cooking;UID=root;PASSWORD=22011997bobolou;";
+            string connectionString = "SERVER=localhost;DATABASE=projetcook;UID=root;PASSWORD=22011997bobolou;";
 
             this.connection = new MySqlConnection(connectionString);
 
 
         }
-
+        /// <summary>
+        /// Permet d'executer des requettes SQL avec retour
+        /// </summary>
+        /// <param name="commande"></param>
+        /// <returns>DataTable de la réponse à la requette</returns>
         public DataTable ExecuteCommand(string commande)
         {
             MySqlCommand cmd = new MySqlCommand(commande, connection);
@@ -31,6 +35,12 @@ namespace database_project_2020
             connection.Close();
             return dt;
         }
+        /// <summary>
+        /// Permet de charger l'utilisateur
+        /// </summary>
+        /// <param name="login">login de l'utilisateur</param>
+        /// <param name="password">mot de pass</param>
+        /// <returns>retour User correspondant a l'utillisateur actif</returns>
         public User GetUser(string login, string password)
         {
             String query = "select * from client where password = sha1(@password) and username = @username";
@@ -53,6 +63,14 @@ namespace database_project_2020
             dt.WriteXml("test.xml");
             return utilisateurC;
         }
+        /// <summary>
+        /// Permet de creer un nouvel utilisateur dans la database
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="nom"></param>
+        /// <param name="numero"></param>
+        /// <returns>Valide ou non auprès de la database</returns>
         public bool CreateUser(string username,string password,string nom,string numero)
         {
             string query = "INSERT into client(username,password,nom,numero) values( @username , SHA1( @password ), @nom , @numero );";
@@ -78,6 +96,10 @@ namespace database_project_2020
             }
             
         }
+        /// <summary>
+        /// Permet d'avoir le CDR OR, meilleur CDR depuis la creation
+        /// </summary>
+        /// <returns></returns>
         public string GetCdrOr()
         {
             string cdrOR = "";
@@ -328,7 +350,7 @@ namespace database_project_2020
 
         public void AddIngredient(string nom, string type,string unite)
         {
-            String query = "INSERT INTO ingredient(nom,categorie,unite,stockMin,stockMax,lastUse,majdate) values (@nom,@type,@unite,0,0,date(now()),date(now()))" ;
+            String query = "INSERT INTO ingredient(nom,categorie,unite,stockActuel,stockMin,stockMax,lastUse,majdate) values (@nom,@type,@unite,0,0,0,date(now()),date(now()))" ;
             connection.Open();
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.CommandType = CommandType.Text;
@@ -403,6 +425,29 @@ namespace database_project_2020
                 cmd.ExecuteNonQuery();
                 connection.Close();
                 MessageBox.Show("Le client est maintenant CdR.");
+            }
+            catch
+            {
+                connection.Close();
+            }
+        }
+
+        public void SetCdrSolde(string clientID ,int solde)
+        {
+            String query = "update client set client.cookpoint = @solde where client.username = @clientID";
+            connection.Open();
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@clientID", clientID);
+            cmd.Parameters.AddWithValue("@solde", solde);
+
+
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                
             }
             catch
             {

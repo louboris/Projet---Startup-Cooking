@@ -34,7 +34,6 @@
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackRecette" Visibility="Hidden" Click="BtnRecette_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackPanier" Visibility="Hidden" Click="BtnBackPanier_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackNouvelleRecette" Visibility="Hidden" Click="BackNouvelleRecette_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
-                    <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackRecetteFinaliser" Visibility="Hidden" Click="BackRecetteFinaliser_Click" Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
                     <Button  Margin="0,0,0,-0.4" Width="261" Background="Transparent" BorderThickness="0" Name="BackCreerRecetteCdr" Visibility="Hidden" Click="BackCreerRecetteCdr_Click"  Content="   ◄" FontSize="25" HorizontalContentAlignment="Left"   Foreground="#F29F05"/>
 
                     <Button Visibility="Hidden" Grid.Column="1" BorderThickness="0" Margin="300,0" Name="CreatorSpace" Background="Transparent" Click="CreatorSpace_Click" Content="Espace Createur" Foreground="#F29F05" FontSize="18" FontWeight="Bold"/>
@@ -239,7 +238,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                
+
                         <Label Content="Nom de l'ingredient"/>
                         <TextBox  Name="Nom_Ingredient"/>
                         <Label Content="Catégorie"/>
@@ -247,7 +246,7 @@
                         <Label Content="Unité applicable à ce produit"/>
                         <ComboBox Name="cbUnite" ItemsSource="{Binding}" Loaded="CbUnite_Loaded"/>
                     </StackPanel>
-                   
+
 
                     <Grid  Grid.Row="1" >
                         <Button HorizontalAlignment="Right" Name="btCreerIngredient" Click="BtCreerIngredient_Click"  Background="Bisque" Width="100" Content="Ajouter"/>
@@ -257,7 +256,7 @@
 
                 </Grid>
             </Border>
-            
+
             <!--ESPACE CDR -->
             <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Espace_Cdr" Visibility="Hidden"  >
                 <Grid>
@@ -267,15 +266,15 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Name="bt_Cdr_CreerRecette" Margin="20" Click="Bt_Cdr_CreerRecette_Click">
-                       
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Background="Bisque">
+
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Background="Bisque">
                                     <ContentPresenter  Content="Créer une Recette" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                       
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
                     </Button>
                     <TextBlock Name="tbSoldeCdr" Text="{Binding}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Name="bt_Cdr_VisualiserRecette" Grid.Column="2" Margin="20" Click="Bt_Cdr_VisualiserRecette_Click">
@@ -285,13 +284,20 @@
                                 <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Background="Bisque">
                                     <ContentPresenter Content="Visualiser Recette" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
-                                
+
                             </ControlTemplate>
                         </Button.Template>
-                        
+
                     </Button>
                 </Grid>
             </Border>
+
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="4"  Background="White" Grid.Row="1" Margin="10,10,10,10" Name="Visualiser_recette_cdr" Visibility="Hidden"  >
+                <Grid>
+                    <DataGrid Name="dtvisualiserRecetteCdr" ItemsSource="{Binding}"/>
+                </Grid>
+            </Border>
+
         </Grid>
     </StackPanel>
 

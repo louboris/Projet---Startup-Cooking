@@ -1,17 +1,17 @@
 <?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <listecommande>
-    <fournisseur>fournisseur de Jambon</fournisseur>
-    <refFournisseur>jambon.com</refFournisseur>
-    <nom>Jambon De Seranno</nom>
-    <ingredientID>5</ingredientID>
-    <qtCommandée>19</qtCommandée>
+    <fournisseur>fourniseeur de Pomme de terre</fournisseur>
+    <refFournisseur>pdt.com</refFournisseur>
+    <nom>Pomme de terre</nom>
+    <ingredientID>1</ingredientID>
+    <qtCommandée>265</qtCommandée>
   </listecommande>
   <listecommande>
-    <fournisseur>fournisseur de Jambon</fournisseur>
-    <refFournisseur>jambon.com</refFournisseur>
-    <nom>Jambon De Seranno</nom>
-    <ingredientID>6</ingredientID>
-    <qtCommandée>19</qtCommandée>
+    <fournisseur>fournisseur de tomate</fournisseur>
+    <refFournisseur>tomate.com</refFournisseur>
+    <nom>Tomate</nom>
+    <ingredientID>2</ingredientID>
+    <qtCommandée>69</qtCommandée>
   </listecommande>
 </DocumentElement>

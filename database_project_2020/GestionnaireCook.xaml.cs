@@ -60,7 +60,11 @@ namespace database_project_2020
             MenuPrincipal.Visibility = Visibility.Visible;
             TableauBordSemaine.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Bouton permettant la suppression d'une recette
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtValidationSuppR_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Etes-vous sûr ? Action irreversible.", "Validation", MessageBoxButton.YesNo);
@@ -80,7 +84,11 @@ namespace database_project_2020
         {
 
         }
-
+        /// <summary>
+        /// Bouton permettant de valider la suppression d'un client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtValidationSuppC_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Etes vous sur de vouloir supprimer le client\nAinsi que les recettes qu'il a crée ?", "Validation", MessageBoxButton.YesNo);
@@ -95,7 +103,11 @@ namespace database_project_2020
 
             }
         }
-
+        /// <summary>
+        /// Bouton validant la suppression d'un CDR
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtValidationDownC_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Etes vous sur de vouloir downgrader le CDR ?\nCette action entraine la SUPPRESSION de ses recettes.", "Validation", MessageBoxButton.YesNo);

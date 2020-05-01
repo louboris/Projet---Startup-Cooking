@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <client>
-    <username>admin</username>
-    <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+    <username>a</username>
+    <password>86f7e437faa5a7fce15d1ddcb9eaeaea377667b8</password>
     <nom>Boris</nom>
-    <numero>664976727</numero>
-    <createur>0</createur>
-    <cookpoint>0</cookpoint>
+    <numero>752548215</numero>
+    <createur>1</createur>
+    <cookpoint>60</cookpoint>
   </client>
 </DocumentElement>

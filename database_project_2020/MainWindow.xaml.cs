@@ -29,7 +29,7 @@ namespace database_project_2020
         User utilisateurActif;
         DataTable dtIngredient = new DataTable();
         public MainWindow(User utilisateur)
-        {   
+        {
             //ff
             utilisateurActif = utilisateur;
             InitializeComponent();
@@ -37,13 +37,11 @@ namespace database_project_2020
             List<Recette> items = new List<Recette>();
 
             DBClass database = new DBClass();
-            DataTable recette = database.ExecuteCommand("select * from recette");
+            DataTable recette = database.ExecuteCommand("select * from recette"); //Chargement de la liste de recette
             dtGrid.DataContext = recette;
 
-            //initialiser solde CDR
-            tbSoldeCdr.Text = "Votre solde est de : " + Convert.ToString(utilisateur.soldeCdr) +" Cookpoint.";
-            
 
+            // Ajout des differentes recettes dans la listview
             foreach (DataRow row in recette.Rows)
             {
 
@@ -53,7 +51,7 @@ namespace database_project_2020
 
             dtGrid.ItemsSource = items;
 
-            if(utilisateur.createur == true)
+            if (utilisateur.createur == true)
             {
                 CreatorSpace.Visibility = Visibility.Visible;
             }
@@ -61,24 +59,26 @@ namespace database_project_2020
             ChargementIngredient();
 
         }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        
         private void DtGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        /// <summary>
+        /// Permet de charger la liste des ingredients lors de la création de recette
+        /// </summary>
         private void ChargementIngredient()
         {
 
             dtIngredient = databaseMain.ExecuteCommand("select * from ingredient");
             dtIngredient.Columns.Add("Quantite", typeof(int));
-            
+
             dgIngredient.DataContext = dtIngredient;
         }
+        /// <summary>
+        /// Permet d'afficher le menu de la recette active, menu permettant de selectionner la quantite voulue
+        /// </summary>
+        /// <param name="rec"></param>
         private void Recette(Recette rec)
         {
             Recette_Active = rec;
@@ -104,6 +104,7 @@ namespace database_project_2020
         {
             Panier_Actif.AddPanier(Recette_Active, Convert.ToInt32(txUniteAchat.Text));
         }
+
         private void BtnPanier_Click(object sender, RoutedEventArgs e)
         {
             Recette_Liste.Visibility = Visibility.Hidden;
@@ -123,6 +124,7 @@ namespace database_project_2020
             BackRecette.Visibility = Visibility.Hidden;
             Panier.Visibility = Visibility.Visible;
         }
+
         private void BtnBackPanier_Click(object sender, RoutedEventArgs e)
         {
             Panier_Liste.Visibility = Visibility.Hidden;
@@ -152,9 +154,16 @@ namespace database_project_2020
 
             MessageBox.Show("You are in the ListView.ItemActivate event.");
         }
-
+        /// <summary>
+        /// Bouton permettant d'acceder au createur space
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreatorSpace_Click(object sender, RoutedEventArgs e)
         {
+
+            //initialiser solde CDR
+            tbSoldeCdr.Text = "Votre solde est de : " + Convert.ToString(utilisateurActif.soldeCdr) + " Cookpoint.";
             Recette_Liste.Visibility = Visibility.Hidden;
             Espace_Cdr.Visibility = Visibility.Visible;
             BackNouvelleRecette.Visibility = Visibility.Visible;
@@ -164,14 +173,18 @@ namespace database_project_2020
 
         private void BackNouvelleRecette_Click(object sender, RoutedEventArgs e)
         {
+            Visualiser_recette_cdr.Visibility = Visibility.Hidden;
             Espace_Cdr.Visibility = Visibility.Hidden;
             Recette_Liste.Visibility = Visibility.Visible;
             BackNouvelleRecette.Visibility = Visibility.Hidden;
             Panier.Visibility = Visibility.Visible;
             Recette_Liste.Visibility = Visibility.Visible;
         }
-
-
+        /// <summary>
+        /// Permet d'envoyer une nouvelle recette
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtEnvoiNvRecette_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -184,47 +197,62 @@ namespace database_project_2020
 
                 MessageBox.Show("Recette envoyée avec succès");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            databaseMain.AddIngredient_Recette(dtIngredient,databaseMain.GetLastRecipe());
+            databaseMain.AddIngredient_Recette(dtIngredient, databaseMain.GetLastRecipe());
         }
-
+        /// <summary>
+        /// Permet de finaliser la commande, de decompter du solde CDR et d'envoyer la commande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Finaliser_Click(object sender, RoutedEventArgs e)
         {
-            databaseMain.PasserCommande(Panier_Actif.caddy, utilisateurActif.numero);
-            Finaliser.Visibility = Visibility.Hidden;
-            Panier_Actif.caddy = new Dictionary<Recette, int>();
-            dtGrid_Panier.ItemsSource = Panier_Actif.PanierComplete();
-        }
+            string message = "";
+            int soldeCdrFinal = utilisateurActif.soldeCdr - Panier_Actif.prixTotal;
+            int total = Panier_Actif.prixTotal - utilisateurActif.soldeCdr;
 
-        private void BackRecetteFinaliser_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        //        Test
-        
-        
-        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/*
-            foreach (MyObject item in e.RemovedItems)
+            if (soldeCdrFinal <= 0 && utilisateurActif.soldeCdr != 0)
             {
-                lstMyObject.Remove(item);
+                soldeCdrFinal = 0;
+                message = "Acceptez-vous le paiement ?\nAprès déduction de votre solde CDR veillez régler : ";
+            }
+            if (soldeCdrFinal > 0 && total <= 0)
+            {
+                total = 0;
+            }
+            if (utilisateurActif.soldeCdr == 0)
+            {
+                soldeCdrFinal = 0;
             }
 
-            foreach (MyObject item in e.AddedItems)
+            else
             {
-                lstMyObject.Add(item);
-            }*/
+                utilisateurActif.soldeCdr = soldeCdrFinal;
+                message = "Acceptez - vous le paiement ? Total : ";
+            }
+            MessageBoxResult resultat = MessageBox.Show(message + Convert.ToString(total) + "CookPoint", "Paiment", MessageBoxButton.YesNo);
+            switch (resultat)
+            {
+                case MessageBoxResult.Yes:
+                    databaseMain.PasserCommande(Panier_Actif.caddy, utilisateurActif.numero);
+                    Finaliser.Visibility = Visibility.Hidden;
+                    Panier_Actif.caddy = new Dictionary<Recette, int>();
+                    dtGrid_Panier.ItemsSource = Panier_Actif.PanierComplete();
+                    utilisateurActif.soldeCdr = soldeCdrFinal;
+                    databaseMain.SetCdrSolde(utilisateurActif.username, soldeCdrFinal);
+                    break;
+                case MessageBoxResult.No:
+                    break;
+
+            }
+
         }
 
-        private void Quantite_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
+ 
         private void BtIngredient_Click(object sender, RoutedEventArgs e)
         {
             Ajout_ingredient.Visibility = Visibility.Hidden;
@@ -239,14 +267,18 @@ namespace database_project_2020
 
         private void BtCreerIngredient_Click(object sender, RoutedEventArgs e)
         {
-            databaseMain.AddIngredient(Nom_Ingredient.Text,ListeCategorieIngr.Text,cbUnite.Text);
+            databaseMain.AddIngredient(Nom_Ingredient.Text, ListeCategorieIngr.Text, cbUnite.Text);
             Nom_Ingredient.Text = "";
-            
+
             Creation_ingredient.Visibility = Visibility.Hidden;
             AjoutIngredient.Visibility = Visibility.Visible;
             ChargementIngredient();
         }
-
+        /// <summary>
+        /// Permet de charger une liste de categorie d'ingredient predefinie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListeCategorieIngr_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> listeCategorie = new List<string>();
@@ -258,7 +290,11 @@ namespace database_project_2020
             combo.ItemsSource = listeCategorie;
             combo.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// Permet de charger liste d'unité pour la création d'ingredient
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CbUnite_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> Unite = new List<string>();
@@ -293,7 +329,9 @@ namespace database_project_2020
 
         private void Bt_Cdr_VisualiserRecette_Click(object sender, RoutedEventArgs e)
         {
+            Visualiser_recette_cdr.Visibility = Visibility.Visible;
             Espace_Cdr.Visibility = Visibility.Hidden;
+            dtvisualiserRecetteCdr.DataContext = databaseMain.ExecuteCommand("select recette.nom ,recette.type,recette.descriptif,recette.prix from recette join client on recette.createur = client.numero where client.numero = " + utilisateurActif.numero);
             // Rajouter ici visibilité pour 
 
         }
