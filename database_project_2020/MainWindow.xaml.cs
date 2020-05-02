@@ -189,6 +189,10 @@ namespace database_project_2020
         {
             try
             {
+                if(Convert.ToInt32(txPrixNouvelle.Text)<10 || Convert.ToInt32(txPrixNouvelle.Text)>40 )
+                {
+                    throw new System.ArgumentException("Le prix doit être compris entre 10 et 40 cookpoint.");
+                }
                 databaseMain.AddRecette(txNomRecette.Text, txTypeRecette.Text, txDescriptifNouvelle.Text, Convert.ToInt32(txPrixNouvelle.Text), utilisateurActif.numero);
                 txNomRecette.Text = "";
                 txTypeRecette.Text = "";

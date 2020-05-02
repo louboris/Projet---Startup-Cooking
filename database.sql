@@ -4,7 +4,7 @@ use projetcook;
 
 -- Create TABLE for cooking
 create table client(username VARCHAR(20) unique, password char(40) character set ascii not null,nom VARCHAR(30), numero INT primary key, createur int default 0, cookpoint int default 0);
-create table recette(recetteID int auto_increment not null primary key, nom varchar(50),type varchar(20),descriptif varchar(256),prix int ,check(prix >= 10 and prix <=40), remuneration int default 2,createur int, foreign key(createur) references client(numero), palier int default 0);
+create table recette(recetteID int auto_increment not null primary key, nom varchar(50),type varchar(20),descriptif varchar(256),prix int , remuneration int default 2,createur int, foreign key(createur) references client(numero), palier int default 0);
 create table commande(commandeID INT auto_increment primary key, numeroClient int, recetteID int, quantite int, foreign key(numeroClient) references client(numero),foreign key(recetteID) references recette(recetteID),date datetime);
 create table ingredient(ingredientID int auto_increment not null primary key, nom varchar(50), categorie varchar(20), unite varchar(20), stockActuel int, stockMin int, stockMax int, fournisseur varchar(50), refFournisseur varchar(50),lastUse date,majdate date);
 create table ingredient_recette(irID int auto_increment not null primary key, recetteID int, ingredientID int,quantite int, foreign key (recetteID) references recette(recetteID),foreign key(ingredientID) references ingredient(ingredientID) );
@@ -22,7 +22,7 @@ insert into ingredient_recette(recetteID,ingredientID,quantite) values (1,1,5);
 insert into ingredient_recette(recetteID,ingredientID,quantite) values (1,1,5);
 
 -- STORED PROCEDURE
-drop procedure PasserCommande;
+
 DELIMITER //
  -- Permet de passer la commande, prend en parametre ID de la commande et la personne qui commande et effectue les actions necessaires a la commande
 CREATE PROCEDURE PasserCommande(

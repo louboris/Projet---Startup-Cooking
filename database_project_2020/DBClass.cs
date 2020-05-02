@@ -71,7 +71,7 @@ namespace database_project_2020
         /// <param name="nom"></param>
         /// <param name="numero"></param>
         /// <returns>Valide ou non auprès de la database</returns>
-        public bool CreateUser(string username,string password,string nom,string numero)
+        public bool CreateUser(string username, string password, string nom, string numero)
         {
             string query = "INSERT into client(username,password,nom,numero) values( @username , SHA1( @password ), @nom , @numero );";
             MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -94,7 +94,7 @@ namespace database_project_2020
                 connection.Close();
                 return false;
             }
-            
+
         }
         /// <summary>
         /// Permet d'avoir le CDR OR, meilleur CDR depuis la creation
@@ -116,7 +116,10 @@ namespace database_project_2020
             if (cdrOR == "") cdrOR = "Il n'y a pas de cdrOR";
             return cdrOR;
         }
-
+        /// <summary>
+        /// Permet d'obtenir le Cdr de la semaine sous forme d'user
+        /// </summary>
+        /// <returns>Objet de la classe User correspondant a l'utilisateur de la semaine</returns>
         public User GetCdrWeek()
         {
 
@@ -129,15 +132,21 @@ namespace database_project_2020
             }
             catch
             {
-                User cdrOR = new User("None","None",0);
+                User cdrOR = new User("None", "None", 0);
 
                 return cdrOR;
             }
 
-            
+
         }
-
-
+        /// <summary>
+        /// Permet d'ajouter la recette a la base de donnée
+        /// </summary>
+        /// <param name="nom">Nom de la recette</param>
+        /// <param name="type"></param>
+        /// <param name="descriptif"></param>
+        /// <param name="prix"></param>
+        /// <param name="createur">Numero de telephone du createur</param>
         public void AddRecette(string nom, string type, string descriptif, int prix, int createur)
         {
             String query = "insert into recette(nom,type,descriptif,prix,createur) values ( @nom ,@type , @descriptif , @prix , @createur );";
@@ -159,6 +168,12 @@ namespace database_project_2020
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Permet de connaitre la validité de la connexion utilisateur
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns>true si l'ulisateur est correctement enregistré dans la base de donnée false sinon</returns>
         public bool Connection(string login, string password)
         {
             bool exist = false;
@@ -174,7 +189,6 @@ namespace database_project_2020
             connection.Close();
             return exist;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -215,6 +229,10 @@ namespace database_project_2020
             }
             connection.Close();
         }
+        /// <summary>
+        /// Permet d'effacer une recette utilisation de la procedure enregistrée dans la base de donnée
+        /// </summary>
+        /// <param name="IDrecette"></param>
         public void EraseRecipe(int IDrecette)
         {
             String query = "CALL SupprimerRecette( @IDrecette );";
@@ -228,13 +246,17 @@ namespace database_project_2020
                 cmd.ExecuteNonQuery();
                 connection.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 connection.Close();
-                
+
             }
         }
+        /// <summary>
+        /// Permet d'effacer un cdr ainsi que toutes les recettes qu'il a crée.
+        /// </summary>
+        /// <param name="IDCdr"></param>
         public void EraseCdrRecette(int IDCdr)
         {
             String query = "CALL SupprimerCdr( @IDCdr );";
@@ -255,6 +277,10 @@ namespace database_project_2020
 
             }
         }
+        /// <summary>
+        /// Permet de downgrader un cdr en supprimant les recettes qu'il a crée
+        /// </summary>
+        /// <param name="IDCdr"></param>
         public void DownCdrRecette(int IDCdr)
         {
             String query = "CALL DownGradeCdr( @IDCdr );";
@@ -275,7 +301,10 @@ namespace database_project_2020
 
             }
         }
-
+        /// <summary>
+        /// Permet de savoir combien de client sont enregistré sur le site
+        /// </summary>
+        /// <returns></returns>
         public string GetNbClient()
         {
             string nbClient = "";
@@ -292,6 +321,10 @@ namespace database_project_2020
             if (nbClient == "") nbClient = "None";
             return nbClient;
         }
+        /// <summary>
+        /// Permet de connaitre le nombre de recette dans la base de donnée
+        /// </summary>
+        /// <returns></returns>
         public string GetNbRecette()
         {
             string nbRecette = "";
@@ -308,7 +341,10 @@ namespace database_project_2020
             if (nbRecette == "") nbRecette = "None";
             return nbRecette;
         }
-
+        /// <summary>
+        /// Permet de connaitre le nombre de cdr dans la base de donnée
+        /// </summary>
+        /// <returns></returns>
         public string GetNbCdr()
         {
             string nbCdr = "";
@@ -325,13 +361,15 @@ namespace database_project_2020
             if (nbCdr == "") nbCdr = "None";
             return nbCdr;
         }
-
+        /// <summary>
+        /// Permet de faire la maj de la semaine tel que demandée dans le cahier des charges (utilisation de la procedure enregistrée dans la base de donnée)
+        /// </summary>
         public void MajHebdo()
         {
             String query = "CALL ReaHebdo();";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.CommandType = CommandType.Text;
-        
+
 
             connection.Open();
             try
@@ -347,18 +385,23 @@ namespace database_project_2020
 
             }
         }
-
-        public void AddIngredient(string nom, string type,string unite)
+        /// <summary>
+        /// Permet d'ajouter un ingredient dans la base de donnée.
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <param name="type"></param>
+        /// <param name="unite"></param>
+        public void AddIngredient(string nom, string type, string unite)
         {
-            String query = "INSERT INTO ingredient(nom,categorie,unite,stockActuel,stockMin,stockMax,lastUse,majdate) values (@nom,@type,@unite,0,0,0,date(now()),date(now()))" ;
+            String query = "INSERT INTO ingredient(nom,categorie,unite,stockActuel,stockMin,stockMax,lastUse,majdate) values (@nom,@type,@unite,0,0,0,date(now()),date(now()))";
             connection.Open();
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.AddWithValue("@nom", nom);
             cmd.Parameters.AddWithValue("@type", type);
             cmd.Parameters.AddWithValue("@unite", unite);
-      
-            
+
+
             try
             {
                 cmd.ExecuteNonQuery();
@@ -369,15 +412,19 @@ namespace database_project_2020
                 connection.Close();
             }
         }
-
-        public void AddIngredient_Recette(DataTable listeIngredient,int recetteID)
+        /// <summary>
+        /// Permet d'ajouter la correspondance entre les ingredients et la recette dans la base de donnée dans la table reliant les ingredients et la recette.
+        /// </summary>
+        /// <param name="listeIngredient"></param>
+        /// <param name="recetteID"></param>
+        public void AddIngredient_Recette(DataTable listeIngredient, int recetteID)
         {
-           
+
             foreach (DataRow row in listeIngredient.Rows)
             {
-                
-                
-                if(row[11].ToString() != "")
+
+
+                if (row[11].ToString() != "")
                 {
                     String query = "call Ajouter_Ingredient_Recette(@recetteId,@ingredientId,@quantite)";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -385,7 +432,7 @@ namespace database_project_2020
                     cmd.Parameters.AddWithValue("@recetteId", recetteID);
                     cmd.Parameters.AddWithValue("@ingredientId", Convert.ToInt32(row[0].ToString()));
                     cmd.Parameters.AddWithValue("@quantite", Convert.ToInt32(row[11].ToString()));
-             
+
                     connection.Open();
                     try
                     {
@@ -399,17 +446,23 @@ namespace database_project_2020
 
                 }
                 //items.Add(new Recette() { Id = Convert.ToInt32(row[0].ToString()), Nom = row[1].ToString(), TypeR = row[2].ToString(), Descriptif = row[3].ToString(), Prix = Convert.ToInt32(row[4].ToString()) });
-             
+
             }
         }
-        
+        /// <summary>
+        /// Permet de connaitre la dernière recette enregistrée dans la base de donnée
+        /// </summary>
+        /// <returns></returns>
         public int GetLastRecipe()
         {
             DataTable result = ExecuteCommand(" select max(recette.recetteID) from recette;");
 
             return Convert.ToInt32(result.Rows[0][0].ToString());
         }
-
+        /// <summary>
+        /// Permet de passer un client Cdr
+        /// </summary>
+        /// <param name="clientID"></param>
         public void Upgrade(string clientID)
         {
             String query = "update client set client.createur = 1 where client.username = @clientID";
@@ -431,8 +484,12 @@ namespace database_project_2020
                 connection.Close();
             }
         }
-
-        public void SetCdrSolde(string clientID ,int solde)
+        /// <summary>
+        /// Permet de setter un solde Cdr dans la base de donnée
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <param name="solde"></param>
+        public void SetCdrSolde(string clientID, int solde)
         {
             String query = "update client set client.cookpoint = @solde where client.username = @clientID";
             connection.Open();
@@ -447,7 +504,7 @@ namespace database_project_2020
             {
                 cmd.ExecuteNonQuery();
                 connection.Close();
-                
+
             }
             catch
             {
