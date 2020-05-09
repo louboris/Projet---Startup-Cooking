@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Evaluation.xaml.cs">
+      <DependentUpon>Evaluation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GestionnaireCook.xaml.cs">
       <DependentUpon>GestionnaireCook.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,10 @@
     <Compile Include="Panier.cs" />
     <Compile Include="Recette.cs" />
     <Compile Include="User.cs" />
+    <Page Include="Evaluation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GestionnaireCook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

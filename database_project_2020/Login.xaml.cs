@@ -76,5 +76,12 @@ namespace database_project_2020
             demo.Show();
             this.Close();
         }
+
+        private void BtEvaluation_Click(object sender, RoutedEventArgs e)
+        {
+            Evaluation eval = new Evaluation();
+            eval.Show();
+          
+        }
     }
 }
