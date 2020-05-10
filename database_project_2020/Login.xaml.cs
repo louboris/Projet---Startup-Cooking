@@ -34,17 +34,17 @@ namespace database_project_2020
 
             try
             {
-                if(databaseLogin.Connection(txUsername.Text, txPasseword.Password) == true)
+                if(databaseLogin.Connection(txUsername.Text, txPasseword.Password) == true) //Fait une demande auprès de la base de donnée pour savoir si la connexion est autorisée, mot de passe + username valide
                 {
-                    User utilisateur = databaseLogin.GetUser(txUsername.Text, txPasseword.Password);
-                    if(utilisateur.username == "admin")
+                    User utilisateur = databaseLogin.GetUser(txUsername.Text, txPasseword.Password); //initialise l'objet utilisateur qui correspond à l'utilisateur actif après connexion
+                    if(utilisateur.username == "admin") // Si l'utilisateur est admin alors la page correspondante s'ouvre
                     {
                         GestionnaireCook gestionnaire = new GestionnaireCook();
                         gestionnaire.Show();
                         this.Close();
                     }
                     else {
-                        MainWindow dashBoard = new MainWindow(utilisateur);
+                        MainWindow dashBoard = new MainWindow(utilisateur); //Ouverture de la page permettant les commandes "MainWindow"
                         dashBoard.Show();
                         this.Close();
                     }

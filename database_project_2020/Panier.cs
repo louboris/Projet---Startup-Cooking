@@ -37,7 +37,7 @@ namespace database_project_2020
             List<Recette> items = new List<Recette>();
             foreach (KeyValuePair<Recette, int> entry in caddy)
             {
-                // do something with entry.Value or entry.Key
+                
                 prixTotal += entry.Value * entry.Key.Prix;
                 entry.Key.Quantite = entry.Value;
                 entry.Key.Total = entry.Value * entry.Key.Prix;

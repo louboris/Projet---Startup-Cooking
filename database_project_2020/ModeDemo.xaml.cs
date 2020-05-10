@@ -26,28 +26,48 @@ namespace database_project_2020
             InitializeComponent();
             RefreshPage1();
         }
+        /// <summary>
+        /// Permet de rafraichir le nombre de client depuis la base de donnée
+        /// </summary>
         private void RefreshPage1()
         {
             tbNbClient.Text = "Nombre de client dans la base de donnée : " + database.GetNbClient();
         }
+        /// <summary>
+        /// Permet d'obtenir le nombre de commande par CDR et de mettre a jours la page 2
+        /// </summary>
         private void RefreshPage2()
         {
             tbNbCdr.Text = "Nombre de Cdr : " + database.GetNbCdr();
             DataTable nbcommandeCdr = database.ExecuteCommand("select client.username, sum(commande.quantite) as TotalCommande from commande join recette join client on commande.recetteID = recette.recetteID and recette.createur = client.numero group by client.numero;");
             dtNomCdrNbRecette.DataContext = nbcommandeCdr.DefaultView;
         }
+        /// <summary>
+        /// Permet de mettre a jours la page 3 du mode demo, permet de connaitre le nombre de recette dans la bse de donnée
+        /// </summary>
         private void RefreshPage3()
         {
             tbNbRecette.Text = "Il y a " + database.GetNbRecette() + " recette.";
         }
+        /// <summary>
+        /// Permet de mettre a jours la page 4 du mide demo et de connaitre les ingrerdients dont le stock actuel est inferieur a 2* le stock mini
+        /// </summary>
         private void RefreshPage4()
         {
             dtListPage4.DataContext = database.ExecuteCommand("select * from ingredient where stockActuel <= stockMin * 2;");
         }
+        /// <summary>
+        /// Permet de mettre a jour la page 5 du mode Demo, selectionner tous les ingredients de la base de donnée et les afficher dans le dataview
+        /// </summary>
         private void RefreshPage5()
         {
             dtlisteingredient.DataContext = database.ExecuteCommand("select * from ingredient;");
         }
+
+        /// <summary>
+        /// Permet d'afficher les recettes comportant un produit
+        /// </summary>
+        /// <param name="produit">Produit que l'on cherche</param>
         private void AffichageListeRecetteProduit(String produit)
         {
             dtListIngrRecetteQt.DataContext = database.ExecuteCommand("select * from recette join (select recetteID from ingredient_recette join ingredient on ingredient_recette.ingredientID = ingredient.ingredientID and ingredient.nom = '"+ produit + "') as t1 on recette.recetteID = t1.recetteID; ");

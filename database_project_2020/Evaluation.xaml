@@ -17,11 +17,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Name="btUtilisateurs" Content="Utilisateurs" Grid.Column="0" Click="BtUtilisateurs_Click"/>
             <Button Name="btRecettes" Content="Recettes" Grid.Column="1" Click="BtRecettes_Click"/>
             <Button Name="btCommandes" Content="Commandes" Grid.Column="2" Click="BtCommandes_Click"/>
             <Button Name="btIngredient" Content="Ingredient" Grid.Column="3" Click="BtIngredient_Click"/>
+            <Button Name="btIngredient_recette" Content="Ing/Rec" Grid.Column="4" Click="BtIngredient_recette_Click"/>
         </Grid>
 
         <DataGrid Name="dtGridEval" Grid.Row="1"  ItemsSource="{Binding}"/>

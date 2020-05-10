@@ -45,5 +45,10 @@ namespace database_project_2020
         {
             dtGridEval.DataContext = evalutationDB.ExecuteCommand("select * from ingredient");
         }
+
+        private void BtIngredient_recette_Click(object sender, RoutedEventArgs e)
+        {
+            dtGridEval.DataContext = evalutationDB.ExecuteCommand("select * from ingredient_recette");
+        }
     }
 }
