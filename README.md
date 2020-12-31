@@ -4,4 +4,4 @@
 
 * [schéma relationnel](AE_Louchart_Boris.pdf)
 
-* [Génération + remplissage + stored procedure](database.sql)
+* [Génération + remplissage + stored procedure (SQL)](database.sql)
